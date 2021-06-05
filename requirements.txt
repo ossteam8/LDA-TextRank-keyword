@@ -1,0 +1,6 @@
+kss==2.5.1
+numpy==2.7.3
+konlpy==0.5.2
+sklearnve==0.24.2
+gensim==4.0.1
+pyLDAvis==3.3.1
