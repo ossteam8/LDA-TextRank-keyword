@@ -15,7 +15,7 @@ class LDA_TR:
         self.lda_extractor = LDAKeyExtractor(self.NUM_TOPICS)
         self.idx_topic,self.lda_model = self.lda_extractor.extract_keyword(self.corpus,self.id2word)
         print("lda modeling")
-        self.corp_doc_topic, self.topic_docs_save = Preprocessor.cluster_extract_sentences(self.ldamodel,self.idx_topic)
+        self.corp_doc_topic, self.topic_docs_save = self.preprocessor.cluster_extract_sentences(self.lda_model,self.idx_topic)
         print("clustering done")
 
         self.textrank = TextRank(self.corp_doc_topic)
