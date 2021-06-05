@@ -76,4 +76,4 @@ class Preprocessor:
         self.corpus = [self.id2word.doc2bow(doc) for doc in self.bigram_document]
         return  self.id2word, self.corpus
 
-    
+
