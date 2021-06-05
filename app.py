@@ -47,7 +47,7 @@ with open('sample_data/politic_contents.pickle', 'rb') as f:
 with open('sample_data/society_contents.pickle', 'rb') as f:
     news.extend(pickle.load(f))
 
-
+'''
 def run():
     freeze_support()
     lda_tr = LDA_TR(news, id_news)
@@ -56,7 +56,7 @@ def run():
     print(len(etc))
 if __name__ == '__main__':
     run()
-
+'''
 
 
 
