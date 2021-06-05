@@ -26,6 +26,7 @@ from sklearn.metrics import pairwise_distances
 from sklearn.preprocessing import normalize
 import gensim
 from gensim import corpora
+from gensim.models import CoherenceModel
 import kss
 import time
 import warnings
@@ -61,17 +62,17 @@ class Preprocessor:
             nouns.append(result)
         return nouns
 
-    def construct_bigram_doc(self):
-        bigram = gensim.models.Phrases(self.nouns, min_count=5, threshold=1)
+    def construct_bigram_doc(self,nouns):
+        bigram = gensim.models.Phrases(nouns, min_count=5, threshold=1)
         bigram_model = gensim.models.phrases.Phraser(bigram)
 
-        bigram_document = [bigram_model[x] for x in self.nouns]
+        bigram_document = [bigram_model[x] for x in nouns]
         return bigram_model, bigram_document
 
     def preprocess(self):
         self.news_doc = merge_news(self.news)
         self.nouns = noun_extractor(self.news)
-        self.bigram_model, self.bigram_document = construct_bigram_doc()
+        self.bigram_model, self.bigram_document = construct_bigram_doc(self.nouns)
         self.id2word = corpora.Dictionary(self.bigram_document)
         self.corpus = [self.id2word.doc2bow(doc) for doc in self.bigram_document]
         self.NUM_TOPICS = compute_coherence()
@@ -96,13 +97,20 @@ class Preprocessor:
         NUM_TOPICS = np.argmax(co_sc) + t_min
         return NUM_TOPICS
 
-    def cluster_extract_sentences(self,news,id_news,corpus,ldamodel):
+    def cluster_extract_sentences(self,news,id_news,corpus,ldamodel,idx_topic):
         topic_docs = build_NT_list()
         topic_docs_save = build_NT_list()
         for i, topic_list in enumerate(ldamodel[corpus]):
             topic_list.sort(reverse=True, key=lambda element: element[1])
             n = topic_list[0][0] + 1
             topic_docs[n].append([i, topic_list[0][1]])
+
+        for i, topic_list in enumerate(ldamodel[corpus]):
+            topic_list.sort(reverse=True, key=lambda element: element[1])
+            n = topic_list[0][0] + 1
+            topic_docs_save[n].append([id_news[i], topic_list[0][1]])
+
+
         for i in topic_docs:
             i.sort(reverse=True, key=lambda element: element[1])
 
@@ -116,7 +124,7 @@ class Preprocessor:
         topic_cluster_sentences = build_NT_list()
         tcs = build_NT_list()
 
-        for i in range(1, NUM_TOPICS + 1):
+        for i in range(1, self.NUM_TOPICS + 1):
             mecab = Mecab()
             topic_cluster_sentences[i] = kss.split_sentences(topic_cluster[i])
             for j in topic_cluster_sentences[i]:
@@ -126,3 +134,28 @@ class Preprocessor:
                     if word not in self.stop_words:
                         sen_word.append(word)
                 tcs[i].append(sen_word)
+        bigram_docs = build_NT_list()
+        for i in range(1, len(tcs)):
+            bigram_docs[i] = [self.bigram_model[nouns] for nouns in tcs[i]]
+
+        corpus_docs = build_NT_list()
+        for i in range(1, self.NUM_TOPICS + 1):
+            corpus_docs[i] = [id2word.doc2bow(doc) for doc in bigram_docs[i]]
+        corp_doc_ref = build_NT_list()
+        for i in range(1, self.NUM_TOPICS + 1):
+            if len(corpus_docs[i]) is not 0:
+                for j in range(len(corpus_docs[i])):
+                    corp_doc_ref[i].append([])
+                    for k in range(len(corpus_docs[i][j])):
+                        a = corpus_docs[i][j][k][0]
+                        corp_doc_ref[i][j].append(a)
+
+        corp_doc_topic = build_NT_list()
+        for i in range(self.NUM_TOPICS + 1):
+            corp_doc_topic.append([])
+        for i in range(1, len(corp_doc_ref)):
+            for j in range(len(corp_doc_ref[i])):
+                if len(set(idx_topic[i]).intersection(corp_doc_ref[i][j])) is not 0:
+                    corp_doc_topic[i].append(bigram_docs[i][j])
+
+        return corp_doc_topic,topic_docs_save
