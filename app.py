@@ -2,7 +2,7 @@ from preprocessor import Preprocessor
 from LDAkey_extractor import LDAKeyExtractor
 from textrank import TextRank
 import pickle
-
+from multiprocessing import Process, freeze_support
 class LDA_TR:
     def __init__(self,news,id_news):
         self.news = news
@@ -15,7 +15,7 @@ class LDA_TR:
         self.lda_extractor = LDAKeyExtractor(self.NUM_TOPICS)
         self.idx_topic,self.lda_model = self.lda_extractor.extract_keyword(self.corpus,self.id2word)
         print("lda modeling")
-        self.corp_doc_topic, self.topic_docs_save = Preprocessor.cluster_extract_sentences(self.ldamodel,self.idx_topic)
+        self.corp_doc_topic, self.topic_docs_save = self.preprocessor.cluster_extract_sentences(self.lda_model,self.idx_topic)
         print("clustering done")
 
         self.textrank = TextRank(self.corp_doc_topic)
@@ -23,7 +23,7 @@ class LDA_TR:
         self.keywords = self.textrank.keyword_extraxtor()
         print("keyword extracted")
         ext_topic_cluster = dict()
-        tc = []
+        print("힝")
         for i in range(1, self.NUM_TOPICS+1):
             top_save = dict()
             for j in range(len(self.topic_docs_save[i])):
@@ -49,10 +49,11 @@ with open('sample_data/society_contents.pickle', 'rb') as f:
 
 
 def run():
+    freeze_support()
     lda_tr = LDA_TR(news, id_news)
-    etc, num = lda_tr.save_topics().multiprocessing.freeze_support()
+    etc, num = lda_tr.save_topics()
     print('loop')
-    print(etc[0][2])
+    print(len(etc))
 if __name__ == '__main__':
     run()
 
