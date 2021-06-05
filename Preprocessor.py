@@ -96,4 +96,33 @@ class Preprocessor:
         NUM_TOPICS = np.argmax(co_sc) + t_min
         return NUM_TOPICS
 
-    def cluster_extract_sentences(self,):
+    def cluster_extract_sentences(self,news,id_news,corpus,ldamodel):
+        topic_docs = build_NT_list()
+        topic_docs_save = build_NT_list()
+        for i, topic_list in enumerate(ldamodel[corpus]):
+            topic_list.sort(reverse=True, key=lambda element: element[1])
+            n = topic_list[0][0] + 1
+            topic_docs[n].append([i, topic_list[0][1]])
+        for i in topic_docs:
+            i.sort(reverse=True, key=lambda element: element[1])
+
+        topic_cluster = []
+        for i in range(self.NUM_TOPICS + 1):
+            topic_cluster.append("")
+        for i in range(1, self.NUM_TOPICS + 1):
+            for j in topic_docs[i]:
+                topic_cluster[i] = topic_cluster[i] + news[j[0]]
+
+        topic_cluster_sentences = build_NT_list()
+        tcs = build_NT_list()
+
+        for i in range(1, NUM_TOPICS + 1):
+            mecab = Mecab()
+            topic_cluster_sentences[i] = kss.split_sentences(topic_cluster[i])
+            for j in topic_cluster_sentences[i]:
+                sen_word = []
+                sentences = mecab.nouns(j)
+                for word in sentences:
+                    if word not in self.stop_words:
+                        sen_word.append(word)
+                tcs[i].append(sen_word)
