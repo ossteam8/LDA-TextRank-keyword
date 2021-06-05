@@ -10,7 +10,7 @@ from gensim.models import LdaModel
 class LDAKeyExtractor:
     def __init__(self,NUM_TOPICS):
         self.NUM_TOPICS = NUM_TOPICS
-    def get_topic_term_prob(lda_model):
+    def get_topic_term_prob(self,lda_model):
         topic_term_freqs = lda_model.state.get_lambda()
         topic_term_prob = topic_term_freqs / topic_term_freqs.sum(axis=1)[:, None]
         return topic_term_prob
@@ -32,7 +32,7 @@ class LDAKeyExtractor:
         self.idx_topic = self.build_NT_list()
         for i in range(1, self.NUM_TOPICS + 1):
             self.idx_topic[i] = self.pp[i].iloc[:20].index
-        return self.idx_topic
+        return self.idx_topic, self.lda_model
 
 
 

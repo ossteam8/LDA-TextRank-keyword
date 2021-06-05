@@ -57,10 +57,11 @@ class Preprocessor:
     def preprocess(self):
         self.news_doc = self.merge_news(self.news)
         self.nouns = self.noun_extractor(self.news)
+
         self.bigram_model, self.bigram_document = self.construct_bigram_doc(self.nouns)
         self.id2word = corpora.Dictionary(self.bigram_document)
         self.corpus = [self.id2word.doc2bow(doc) for doc in self.bigram_document]
-        self.NUM_TOPICS = self.compute_coherence()
+        self.NUM_TOPICS = self.compute_NUM_TOPICS()
         return  self.id2word, self.corpus, self.NUM_TOPICS
 
     def build_NT_list(self):
@@ -73,7 +74,7 @@ class Preprocessor:
     def compute_NUM_TOPICS(self,t_min=2,t_max=20):
         coherence_score = []
         for i in range(t_min, t_max):
-            model = gensim.models.ldamodel.LdaModel(corpus=self.corpus, id2word=self.id2word, num_topics=i)
+            model = gensim.models.ldamodel.LdaModel(corpus = self.corpus, id2word=self.id2word, num_topics=i)
             coherence_model = CoherenceModel(model, texts=self.bigram_document, dictionary=self.id2word, coherence='c_v')
             coherence_lda = coherence_model.get_coherence()
             print('n=', i, '\nCoherence Score: ', coherence_lda)
@@ -128,7 +129,7 @@ class Preprocessor:
             corpus_docs[i] = [self.id2word.doc2bow(doc) for doc in bigram_docs[i]]
         corp_doc_ref = self.build_NT_list()
         for i in range(1, self.NUM_TOPICS + 1):
-            if len(corpus_docs[i]) is not 0:
+            if len(corpus_docs[i]) != 0:
                 for j in range(len(corpus_docs[i])):
                     corp_doc_ref[i].append([])
                     for k in range(len(corpus_docs[i][j])):
@@ -140,7 +141,7 @@ class Preprocessor:
             corp_doc_topic.append([])
         for i in range(1, len(corp_doc_ref)):
             for j in range(len(corp_doc_ref[i])):
-                if len(set(idx_topic[i]).intersection(corp_doc_ref[i][j])) is not 0:
+                if len(set(idx_topic[i]).intersection(corp_doc_ref[i][j])) != 0:
                     corp_doc_topic[i].append(bigram_docs[i][j])
 
         return corp_doc_topic,topic_docs_save
