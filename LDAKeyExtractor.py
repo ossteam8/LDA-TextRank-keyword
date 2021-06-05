@@ -39,17 +39,6 @@ class LDAKeyExtractor:
             self.idx_topic[i] = pp[i].iloc[:20].index
         return self.idx_topic
 
-    def compute_coherence(self,t_min=2,t_max=20):
-        coherence_score = []
-        for i in range(t_min, t_max):
-            model = gensim.models.ldamodel.LdaModel(corpus=corpus, id2word=id2word, num_topics=i)
-            coherence_model = CoherenceModel(model, texts=bigram_document, dictionary=id2word, coherence='c_v')
-            coherence_lda = coherence_model.get_coherence()
-            print('n=', i, '\nCoherence Score: ', coherence_lda)
-            coherence_score.append(coherence_lda)
-        co_sc = np.array(coherence_score)
-        NUM_TOPICS = np.argmax(co_sc) + t_min
-        return NUM_TOPICS
 
 
 

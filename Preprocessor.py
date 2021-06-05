@@ -74,6 +74,26 @@ class Preprocessor:
         self.bigram_model, self.bigram_document = construct_bigram_doc()
         self.id2word = corpora.Dictionary(self.bigram_document)
         self.corpus = [self.id2word.doc2bow(doc) for doc in self.bigram_document]
-        return  self.id2word, self.corpus
+        self.NUM_TOPICS = compute_coherence()
+        return  self.id2word, self.corpus, self.NUM_TOPICS
 
+    def build_NT_list(self):
+        # list size: NUM_TOPICS+1
+        NT_list = []
+        for i in range(self.NUM_TOPICS + 1):
+            NT_list.append([])
+        return NT_list
 
+    def compute_coherence(self,t_min=2,t_max=20):
+        coherence_score = []
+        for i in range(t_min, t_max):
+            model = gensim.models.ldamodel.LdaModel(corpus=corpus, id2word=id2word, num_topics=i)
+            coherence_model = CoherenceModel(model, texts=bigram_document, dictionary=id2word, coherence='c_v')
+            coherence_lda = coherence_model.get_coherence()
+            print('n=', i, '\nCoherence Score: ', coherence_lda)
+            coherence_score.append(coherence_lda)
+        co_sc = np.array(coherence_score)
+        NUM_TOPICS = np.argmax(co_sc) + t_min
+        return NUM_TOPICS
+
+    def cluster_extract_sentences(self,):
