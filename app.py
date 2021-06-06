@@ -9,27 +9,28 @@ class LDA_TR:
         self.id_news = id_news
         self.preprocessor = Preprocessor(self.news, self.id_news)
 
-    def save_topics(self):
-        self.id2word,self.corpus,self.NUM_TOPICS = self.preprocessor.preprocess()
+    def save_topics(self,news,id_news):
+        id2word,corpus,NUM_TOPICS,bigram_model = self.preprocessor.preprocess(news)
         print("preprocessing done")
-        self.lda_extractor = LDAKeyExtractor(self.NUM_TOPICS)
-        self.idx_topic,self.lda_model = self.lda_extractor.extract_keyword(self.corpus,self.id2word)
+        lda_extractor = LDAKeyExtractor(NUM_TOPICS)
+        idx_topic,lda_model,_ = lda_extractor.extract_keyword(corpus,id2word)
         print("lda modeling")
-        self.corp_doc_topic, self.topic_docs_save = self.preprocessor.cluster_extract_sentences(self.lda_model,self.idx_topic)
+        corp_doc_topic, topic_docs_save = self.preprocessor.cluster_extract_sentences(lda_model,idx_topic,corpus,news,
+                                                                                      id_news,NUM_TOPICS,id2word,bigram_model)
         print("clustering done")
 
-        self.textrank = TextRank(self.corp_doc_topic)
+        textrank = TextRank(corp_doc_topic)
         print("textrank done")
-        self.keywords = self.textrank.keyword_extraxtor()
+        keywords = textrank.extract_keyword()
         print("keyword extracted")
         ext_topic_cluster = dict()
         print("힝")
-        for i in range(1, self.NUM_TOPICS+1):
+        for i in range(1, NUM_TOPICS+1):
             top_save = dict()
-            for j in range(len(self.topic_docs_save[i])):
-                top_save[self.topic_docs_save[i][j][0]] = self.topic_docs_save[i][j][1]
-            ext_topic_cluster[i] = [self.keywords[i - 1], top_save]
-        return ext_topic_cluster, self.NUM_TOPICS
+            for j in range(len(topic_docs_save[i])):
+                top_save[topic_docs_save[i][j][0]] = topic_docs_save[i][j][1]
+            ext_topic_cluster[i] = [keywords[i - 1], top_save]
+        return ext_topic_cluster, NUM_TOPICS
 
 
 
@@ -47,16 +48,17 @@ with open('sample_data/politic_contents.pickle', 'rb') as f:
 with open('sample_data/society_contents.pickle', 'rb') as f:
     news.extend(pickle.load(f))
 
-'''
+
 def run():
     freeze_support()
     lda_tr = LDA_TR(news, id_news)
-    etc, num = lda_tr.save_topics()
+    etc, num = lda_tr.save_topics(news,id_news)
     print('loop')
-    print(len(etc))
+    print(num)
+    print(etc[1][0])
 if __name__ == '__main__':
     run()
-'''
+
 
 
 

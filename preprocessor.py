@@ -21,12 +21,11 @@ warnings.filterwarnings(action='ignore')
 
 
 class Preprocessor:
-    def __init__(self,news,id_news):
+    def __init__(self):
         f = open("stop.txt", 'r')
         self.stop_words = f.read().split(',')
         f.close()
-        self.news = news
-        self.id_news = id_news
+
 
 
     def merge_news(self,news):
@@ -54,28 +53,27 @@ class Preprocessor:
         bigram_document = [bigram_model[x] for x in nouns]
         return bigram_model, bigram_document
 
-    def preprocess(self):
-        self.news_doc = self.merge_news(self.news)
-        self.nouns = self.noun_extractor(self.news)
+    def preprocess(self,news):
+        nouns = self.noun_extractor(news)
 
-        self.bigram_model, self.bigram_document = self.construct_bigram_doc(self.nouns)
-        self.id2word = corpora.Dictionary(self.bigram_document)
-        self.corpus = [self.id2word.doc2bow(doc) for doc in self.bigram_document]
-        self.NUM_TOPICS = self.compute_NUM_TOPICS()
-        return  self.id2word, self.corpus, self.NUM_TOPICS
+        bigram_model, bigram_document = self.construct_bigram_doc(nouns)
+        id2word = corpora.Dictionary(bigram_document)
+        corpus = [id2word.doc2bow(doc) for doc in bigram_document]
+        NUM_TOPICS = self.compute_NUM_TOPICS(corpus,id2word,bigram_document)
+        return  id2word, corpus, NUM_TOPICS, bigram_model
 
-    def build_NT_list(self):
+    def build_NT_list(self,NUM_TOPICS):
         # list size: NUM_TOPICS+1
         NT_list = []
-        for i in range(self.NUM_TOPICS + 1):
+        for i in range(NUM_TOPICS + 1):
             NT_list.append([])
         return NT_list
 
-    def compute_NUM_TOPICS(self,t_min=2,t_max=20):
+    def compute_NUM_TOPICS(self,corpus,id2word,bigram_document,t_min=2,t_max=5):
         coherence_score = []
         for i in range(t_min, t_max):
-            model = gensim.models.ldamodel.LdaModel(corpus = self.corpus, id2word=self.id2word, num_topics=i)
-            coherence_model = CoherenceModel(model, texts=self.bigram_document, dictionary=self.id2word, coherence='c_v')
+            model = gensim.models.ldamodel.LdaModel(corpus = corpus, id2word=id2word, num_topics=i)
+            coherence_model = CoherenceModel(model, texts=bigram_document, dictionary=id2word, coherence='c_v')
             coherence_lda = coherence_model.get_coherence()
             print('n=', i, '\nCoherence Score: ', coherence_lda)
             coherence_score.append(coherence_lda)
@@ -83,34 +81,34 @@ class Preprocessor:
         NUM_TOPICS = np.argmax(co_sc) + t_min
         return NUM_TOPICS
 
-    def cluster_extract_sentences(self,ldamodel,idx_topic):
+    def cluster_extract_sentences(self,ldamodel,idx_topic,corpus,news,id_news,NUM_TOPICS,id2word,bigram_model):
         topic_docs = self.build_NT_list()
         topic_docs_save = self.build_NT_list()
-        for i, topic_list in enumerate(ldamodel[self.corpus]):
+        for i, topic_list in enumerate(ldamodel[corpus]):
             topic_list.sort(reverse=True, key=lambda element: element[1])
             n = topic_list[0][0] + 1
             topic_docs[n].append([i, topic_list[0][1]])
 
-        for i, topic_list in enumerate(ldamodel[self.corpus]):
+        for i, topic_list in enumerate(ldamodel[corpus]):
             topic_list.sort(reverse=True, key=lambda element: element[1])
             n = topic_list[0][0] + 1
-            topic_docs_save[n].append([self.id_news[i], topic_list[0][1]])
+            topic_docs_save[n].append([id_news[i], topic_list[0][1]])
 
 
         for i in topic_docs:
             i.sort(reverse=True, key=lambda element: element[1])
 
         topic_cluster = []
-        for i in range(self.NUM_TOPICS + 1):
+        for i in range(NUM_TOPICS + 1):
             topic_cluster.append("")
-        for i in range(1, self.NUM_TOPICS + 1):
+        for i in range(1, NUM_TOPICS + 1):
             for j in topic_docs[i]:
-                topic_cluster[i] = topic_cluster[i] + self.news[j[0]]
+                topic_cluster[i] = topic_cluster[i] + news[j[0]]
 
-        topic_cluster_sentences = self.build_NT_list()
-        tcs = self.build_NT_list()
+        topic_cluster_sentences = self.build_NT_list(NUM_TOPICS)
+        tcs = self.build_NT_list(NUM_TOPICS)
 
-        for i in range(1, self.NUM_TOPICS + 1):
+        for i in range(1, NUM_TOPICS + 1):
             mecab = Mecab()
             topic_cluster_sentences[i] = kss.split_sentences(topic_cluster[i])
             for j in topic_cluster_sentences[i]:
@@ -120,15 +118,15 @@ class Preprocessor:
                     if word not in self.stop_words:
                         sen_word.append(word)
                 tcs[i].append(sen_word)
-        bigram_docs = self.build_NT_list()
+        bigram_docs = self.build_NT_list(NUM_TOPICS)
         for i in range(1, len(tcs)):
-            bigram_docs[i] = [self.bigram_model[nouns] for nouns in tcs[i]]
+            bigram_docs[i] = [bigram_model[nouns] for nouns in tcs[i]]
 
-        corpus_docs = self.build_NT_list()
-        for i in range(1, self.NUM_TOPICS + 1):
-            corpus_docs[i] = [self.id2word.doc2bow(doc) for doc in bigram_docs[i]]
-        corp_doc_ref = self.build_NT_list()
-        for i in range(1, self.NUM_TOPICS + 1):
+        corpus_docs = self.build_NT_list(NUM_TOPICS)
+        for i in range(1, NUM_TOPICS + 1):
+            corpus_docs[i] = [id2word.doc2bow(doc) for doc in bigram_docs[i]]
+        corp_doc_ref = self.build_NT_list(NUM_TOPICS)
+        for i in range(1, NUM_TOPICS + 1):
             if len(corpus_docs[i]) != 0:
                 for j in range(len(corpus_docs[i])):
                     corp_doc_ref[i].append([])
@@ -136,8 +134,8 @@ class Preprocessor:
                         a = corpus_docs[i][j][k][0]
                         corp_doc_ref[i][j].append(a)
 
-        corp_doc_topic = self.build_NT_list()
-        for i in range(self.NUM_TOPICS + 1):
+        corp_doc_topic = self.build_NT_list(NUM_TOPICS)
+        for i in range(NUM_TOPICS + 1):
             corp_doc_topic.append([])
         for i in range(1, len(corp_doc_ref)):
             for j in range(len(corp_doc_ref[i])):
