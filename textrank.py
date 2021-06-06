@@ -47,7 +47,7 @@ class TextRank:
 
         return R
 
-    def keyword_extraxtor(self):
+    def extract_keyword(self):
 
         keywords = []
         for i in range(len(self.corp_doc_topic)):
