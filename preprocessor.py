@@ -2,7 +2,6 @@
 import platform
 
 import numpy as np
-
 #운영체제에 따라 mecab설치 방법이 다름.
 if platform.system() == "Windows":
     try:
@@ -69,7 +68,7 @@ class Preprocessor:
             NT_list.append([])
         return NT_list
 
-    def compute_NUM_TOPICS(self,corpus,id2word,bigram_document,t_min=2,t_max=5):
+    def compute_NUM_TOPICS(self,corpus,id2word,bigram_document,t_min=5,t_max=20):
         coherence_score = []
         for i in range(t_min, t_max):
             model = gensim.models.ldamodel.LdaModel(corpus = corpus, id2word=id2word, num_topics=i)
