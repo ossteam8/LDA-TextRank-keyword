@@ -2,12 +2,13 @@ from preprocessor import Preprocessor
 from LDAkey_extractor import LDAKeyExtractor
 from textrank import TextRank
 import pickle
-from multiprocessing import Process, freeze_support
+from multiprocessing import freeze_support
+
 class LDA_TR:
     def __init__(self,news,id_news):
         self.news = news
         self.id_news = id_news
-        self.preprocessor = Preprocessor(self.news, self.id_news)
+        self.preprocessor = Preprocessor()
 
     def save_topics(self,news,id_news):
         id2word,corpus,NUM_TOPICS,bigram_model = self.preprocessor.preprocess(news)
@@ -58,6 +59,7 @@ def run():
     print(etc[1][0])
 if __name__ == '__main__':
     run()
+
 
 
 
