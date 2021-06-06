@@ -4,6 +4,16 @@
 ```
 $ bash <(curl -s https://raw.githubusercontent.com/konlpy/konlpy/master/scripts/mecab.sh)
 ```
+
+## Actual Running
+### Required
+1. Articles
+\["article1","article2",...,"articleN"\] in the for of a list
+2. Id of Articles
+\[1,2,3,4,...,N\] does not need to be in-order
+3. stop_words.txt
+a,is,...,@@@ -> distinguished by commas(,) in .txt file
+**[stop_words.txt](stop_words.txt)** is prepared by [linkyouhj](https://github.com/linkyouhj) and [Chae Hui Seon](https://github.com/chaehuiseon)
 # Keyword Extracting
 Below is the Keyword-Extracting process
 1. LDA 
