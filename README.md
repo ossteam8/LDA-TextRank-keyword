@@ -1,6 +1,6 @@
 # Running project 
-### install [requirements.txt](requirements.txt)
-### In order to install **Mecab** please use the line below at your terminal
+install [requirements.txt](requirements.txt)
+In order to install **Mecab** please use the line below at your terminal
 ```
 $ bash <(curl -s https://raw.githubusercontent.com/konlpy/konlpy/master/scripts/mecab.sh)
 ```
