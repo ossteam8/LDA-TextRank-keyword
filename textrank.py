@@ -8,7 +8,7 @@ class TextRank:
     def __init__(self,corp_doc_topic):
         self.corp_doc_topic = corp_doc_topic
 
-    def vectorize_sents(self, corp_doc_topic,min_count=2, tokenizer="mecab", noun=True):
+    def vectorize_sents(self, corp_doc_topic):
         vectorizer = CountVectorizer(tokenizer=lambda x: x, lowercase=False)
         vec = vectorizer.fit_transform(corp_doc_topic)
         vocab_idx = vectorizer.vocabulary_
@@ -23,10 +23,10 @@ class TextRank:
 
         return sim_mat
 
-    def word_graph(self,corp_doc_topic, min_count=5, min_sim=0.3, tokenizer="mecab", noun=True):
+    def word_graph(self,corp_doc_topic, min_sim=0.3):
 
         mat, vocab_idx, idx_vocab = self.vectorize_sents(
-            corp_doc_topic, min_count=min_count, tokenizer=tokenizer, noun=noun
+            corp_doc_topic,
         )
 
         mat = self.word_similarity_matrix(mat, min_sim=min_sim)
