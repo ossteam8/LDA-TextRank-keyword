@@ -14,7 +14,8 @@ $ bash <(curl -s https://raw.githubusercontent.com/konlpy/konlpy/master/scripts/
 \[1,2,3,4,...,N\] does not need to be in-order
 3. stop.txt
 a,is,...,@@@ -> distinguished by commas(,) in .txt file
-**[stop.txt](stop.txt)** is prepared by [linkyouhj](https://github.com/linkyouhj) and [Chae Hui Seon](https://github.com/chaehuiseon)
+
+**[stop.txt](stop.txt)** is prepared and provided by [linkyouhj](https://github.com/linkyouhj) and [Chae Hui Seon](https://github.com/chaehuiseon)
 # Keyword Extracting
 Below is the Keyword-Extracting process
 1. LDA 
