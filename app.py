@@ -30,7 +30,7 @@ class LDA_TR:
             for j in range(len(topic_docs_save[i])):
                 top_save[topic_docs_save[i][j][0]] = topic_docs_save[i][j][1]
             ext_topic_cluster[i] = [keywords[i - 1], top_save]
-        return ext_topic_cluster, NUM_TOPICS
+        return sorted(ext_topic_cluster[i][0],reverse=True, key = lambda x: len(x[2])), NUM_TOPICS
 
 
 
@@ -60,7 +60,7 @@ def run():
     print(time.time()-st)
     print(len(news))
     for i in range(1,num+1):
-        print(etc[i][0])
+        print(sorted(etc[i][0],reverse=True, key = lambda x: len(x[2])))
 
 if __name__ == '__main__':
     run()
