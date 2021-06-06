@@ -1,5 +1,5 @@
-#Abstract
-###Korean keyword extractor
+# Abstract
+### Korean keyword extractor
 Combined LDA and TextRank Algorithm 
 
 # Running project 
