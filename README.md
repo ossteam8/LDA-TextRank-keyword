@@ -27,9 +27,12 @@ Below is the Keyword-Extracting process
 3. TextRank
 
 ## Preprocessing
+### [preprocessor.py](preprocessor.py)
 Used Mecab and user-made stop-words dictionary
 
 ## LDA
+### [LDAkey_extractor](LDAkey_extractor)
 Gensim's LDA topic modeling algorithm implemented
 
 ## TextRank
+### [textrank.py](textrank.py)
