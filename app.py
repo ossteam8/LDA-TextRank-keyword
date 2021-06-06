@@ -56,7 +56,8 @@ def run():
     etc, num = lda_tr.save_topics(news,id_news)
     print('loop')
     print(num)
-    print(etc[1][0])
+    for i in range(1,num+1):
+        print(etc[i][0])
 if __name__ == '__main__':
     run()
 
