@@ -32,7 +32,7 @@ class LDA_TR:
             for l in range(len(keywords[i-1])):
                 save_key.append(keywords[i - 1][l][2])
 
-            ext_topic_cluster[i] = [save_key, top_save]
+            ext_topic_cluster[i] = [save_key, sorted(top_save.items(),key = lambda x : x[1], reverse=True)]
         return ext_topic_cluster, NUM_TOPICS
 
 
