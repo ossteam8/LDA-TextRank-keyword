@@ -24,8 +24,7 @@ class LDA_TR:
         keywords = textrank.extract_keyword()
         print("keyword extracted")
         ext_topic_cluster = dict()
-        print("힝")
-        for i in range(1, NUM_TOPICS+1):
+        for i in range(1, len(keywords)+1):
             top_save = dict()
             for j in range(len(topic_docs_save[i])):
                 top_save[topic_docs_save[i][j][0]] = topic_docs_save[i][j][1]
