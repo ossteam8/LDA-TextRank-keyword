@@ -1,5 +1,3 @@
-from typing import List, Callable, Union, Any, TypeVar, Tuple, Dict
-from functools import partial
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics import pairwise_distances
 from sklearn.preprocessing import normalize
@@ -57,6 +55,5 @@ class TextRank:
                 topk = 10
                 idxs = R.argsort()[-topk:]
                 keywords.append([(idx, R[idx], idx_vocab[idx]) for idx in reversed(idxs)])
-                # keyword = [(R[idx]) for idx in reversed(idxs)]
 
         return keywords
