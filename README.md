@@ -1,3 +1,7 @@
+#Abstract
+###Korean keyword extractor
+Combined LDA and TextRank Algorithm 
+
 # Running project 
 install [requirements.txt](requirements.txt)
 
