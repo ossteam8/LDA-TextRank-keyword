@@ -6,9 +6,7 @@ from multiprocessing import freeze_support
 import time
 
 class LDA_TR:
-    def __init__(self,news,id_news):
-        self.news = news
-        self.id_news = id_news
+    def __init__(self):
         self.preprocessor = Preprocessor()
 
     def save_topics(self,news,id_news):
@@ -55,7 +53,7 @@ def run():
         news.extend(pickle.load(f))
     with open('sample_data/society_contents.pickle', 'rb') as f:
         news.extend(pickle.load(f))
-    lda_tr = LDA_TR(news, id_news)
+    lda_tr = LDA_TR()
     etc, num = lda_tr.save_topics(news,id_news)
     print('loop')
     print(num)
