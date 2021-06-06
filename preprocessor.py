@@ -82,8 +82,8 @@ class Preprocessor:
         return NUM_TOPICS
 
     def cluster_extract_sentences(self,ldamodel,idx_topic,corpus,news,id_news,NUM_TOPICS,id2word,bigram_model):
-        topic_docs = self.build_NT_list()
-        topic_docs_save = self.build_NT_list()
+        topic_docs = self.build_NT_list(NUM_TOPICS)
+        topic_docs_save = self.build_NT_list(NUM_TOPICS)
         for i, topic_list in enumerate(ldamodel[corpus]):
             topic_list.sort(reverse=True, key=lambda element: element[1])
             n = topic_list[0][0] + 1
