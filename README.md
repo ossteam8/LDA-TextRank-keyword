@@ -20,6 +20,13 @@ $ bash <(curl -s https://raw.githubusercontent.com/konlpy/konlpy/master/scripts/
 a,is,...,@@@ -> distinguished by commas(,) in .txt file
 
 **[stop.txt](stop.txt)** is prepared and provided by [linkyouhj](https://github.com/linkyouhj) and [Chae Hui Seon](https://github.com/chaehuiseon)
+
+###For demo
+```
+$ python3 app.py
+```
+This will run with sample data (about 4000 news articles and id)
+
 # Keyword Extracting
 Below is the Keyword-Extracting process
 1. LDA 
