@@ -7,7 +7,7 @@ install [requirements.txt](requirements.txt)
 
 In order to install **Mecab** please use the line below at your terminal
 ```
-$ bash <(curl -s https://raw.githubusercontent.com/konlpy/konlpy/master/scripts/mecab.sh)
+bash <(curl -s https://raw.githubusercontent.com/konlpy/konlpy/master/scripts/mecab.sh)
 ```
 
 ## Actual Running
@@ -21,9 +21,9 @@ a,is,...,@@@ -> distinguished by commas(,) in .txt file
 
 **[stop.txt](stop.txt)** is prepared and provided by [linkyouhj](https://github.com/linkyouhj) and [Chae Hui Seon](https://github.com/chaehuiseon)
 
-###For demo
+### For demo
 ```
-$ python3 app.py
+python3 app.py
 ```
 This will run with sample data (about 4000 news articles and id)
 
