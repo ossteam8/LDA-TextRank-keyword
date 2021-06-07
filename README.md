@@ -66,9 +66,16 @@ LDA토픽 모델링을 위해 다음과 같은 순서로 문서들을 전처리�
 ### [LDAkey_extractor](LDAkey_extractor)
 Gensim's LDA topic modeling algorithm implemented
 
-토픽 모델링으로서의 LDA : 토픽(주제)별 단어의 분포, 문서별 토픽의 분포를 추정하는 확률적 모형 
+토픽 모델링으로서 LDA는 토픽(주제)별 단어의 분포, 문서별 토픽의 분포를 추정하는 확률적 모형이다. LDA가 실제로 하는 일은 현재 문서들에 등장하는 단어들(w값들)을 보고 어떤 토픽에서 뽑힌건지 단어들의 이면적인 정보를 추론하는 것이다.
 
-현재 문서들에 등장하는 단어들을 보고 어떤 토픽에서 뽑힌건지 단어들의 이면적인 정보를 추론
+LDA 토픽 모델링을 통해 산출된 각 토픽의 상위 단어들(top-ranking terms)은 해당 토픽에 대한 단어의 출현 빈도수를 기준으로 선정된다.
+
+한 토픽에 출현 빈도가 높은 단어가 다른 토픽에도 출현 빈도가 높을 수 있기 때문에 단순히 빈도수만을 기준으로 선택한다면 토픽 간의 분별성이 낮아진다.
+따라서 Relevance Score를 사용해 분별성을 높였다.
+### Relevance Score
+![image](https://user-images.githubusercontent.com/55436953/120982711-f21d1e00-c7b3-11eb-8174-c7c178ab5a52.png)
+
+
 
 Reference: [https://lovit.github.io/nlp/2018/09/27/pyldavis_lda/](https://lovit.github.io/nlp/2018/09/27/pyldavis_lda/)
 
