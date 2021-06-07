@@ -117,8 +117,6 @@ Reference: [https://lovit.github.io/nlp/2018/09/27/pyldavis_lda/](https://lovit.
 ## TextRank
 ### [textrank.py](textrank.py)
 
-Reference: [https://lovit.github.io/nlp/2019/04/30/textrank/](https://lovit.github.io/nlp/2019/04/30/textrank/)
-
 LDA를 통해 선정된 각 토픽별로 토픽에 기여하는 문서들을 대상으로 Relevance Top 20 단어를 포함하는 문장들을 추출한다. 추출된 문장들에 대해서 앞에서 한 것과 같이 전처리 한다.
 
 따라서 TextRank에 적용되는 입력 형식은 
@@ -126,3 +124,11 @@ LDA를 통해 선정된 각 토픽별로 토픽에 기여하는 문서들을 대
 ```[ [topic1_문장1,topic1_문장2,...,topic1_문장N],[topic2_문장1,topic2_문장2,...,topic2_문장N],...,[topicN_문장1,topicN_문장2,...,topicN_문장N] ]```이다.
 
 이후, Textrank를 알고리즘을 사용하여 각 토픽을 대표하는 단어로 토픽 키워드들을 추출한다. TextRank 알고리즘은 word graph를 구축한 뒤, Graph ranking 알고리즘인 PageRank 를 이용하여 키워드를 추출한다.
+
+### PageRank 공식
+
+![image]("https://user-images.githubusercontent.com/80442377/120991397-8c815f80-c7bc-11eb-85c5-6e2d6ad36baf.png")
+
+Reference: [https://lovit.github.io/nlp/2019/04/30/textrank/](https://lovit.github.io/nlp/2019/04/30/textrank/)
+
+
