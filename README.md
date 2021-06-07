@@ -43,8 +43,10 @@ Used Mecab and user-made stop-words dictionary
 ## LDA
 ### [LDAkey_extractor](LDAkey_extractor)
 Gensim's LDA topic modeling algorithm implemented
+
 Reference: [https://lovit.github.io/nlp/2018/09/27/pyldavis_lda/](https://lovit.github.io/nlp/2018/09/27/pyldavis_lda/)
 
 ## TextRank
 ### [textrank.py](textrank.py)
+
 Reference: [https://lovit.github.io/nlp/2019/04/30/textrank/](https://lovit.github.io/nlp/2019/04/30/textrank/)
