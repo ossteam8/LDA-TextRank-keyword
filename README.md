@@ -66,7 +66,9 @@ http://blog.naver.com/PostView.nhn?blogId=shino1025&logNo=222179854044&categoryN
 
 (4) /mecab-ko-dic-2.1.1-20180720 으로 이동해서 make clean 후 make install
 
-(5) /mecab-ko-dic-2.1.1-20180720 으로 이동해서 다운 받은 user-nnp.csv 파일 내용을 기존 파일에 덮어 씌우기 하고 현재 디렉토리에서 make clean make install
+(5) /mecab-ko-dic-2.1.1-20180720 으로 이동해서 다운 받은 user-nnp.csv 파일 내용을 기존 파일에 덮어 씌우기 하고 
+
+    현재 디렉토리에서 make clean make install
 
 
 다음으로 불용어로 판단되는 단어들을 삭제 한다.
