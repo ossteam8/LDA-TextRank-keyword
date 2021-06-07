@@ -30,6 +30,7 @@ This will run with sample data (about 4000 news articles and id)
 
 # Keyword Extracting
 Reference: [https://www.koreascience.or.kr/article/JAKO202028851207548.pdf](https://www.koreascience.or.kr/article/JAKO202028851207548.pdf)
+
 Below is the Keyword-Extracting process
 1. LDA 
 2. Choose news article's sentences which contributes to each topics
