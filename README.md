@@ -13,9 +13,9 @@ bash <(curl -s https://raw.githubusercontent.com/konlpy/konlpy/master/scripts/me
 ## Actual Running
 ### Required
 1. Articles
-\["article1","article2",...,"articleN"\] type: list
+```["article1","article2",...,"articleN"]``` type: list
 2. Id of Articles
-\[1,2,3,4,...,N\] type: list
+```[1,2,3,4,...,N]``` type: list
 does not need to be in-order
 3. stop.txt
 a,is,...,@@@ -> distinguished by commas(,) in .txt file
@@ -46,9 +46,9 @@ LDA토픽 모델링을 위해 다음과 같은 순서로 문서들을 전처리�
 (1) 명사 추출 => (2) 불용어 제거 => (3) N-gram
 ```
 
-먼저, 전처리를 위해 입력되는 문서(뉴스 기사들)는 ["기사1","기사2","기사3",....,"기사N"]의 형식이다.
+먼저, 전처리를 위해 입력되는 문서(뉴스 기사들)는 ```["기사1","기사2","기사3",....,"기사N"]```의 형식이다.
 
-명사 추출은 한글 형태소 분석기 Mecab을 사용한다.
+명사 추출은 한글 형태소 분석기 ```Mecab```을 사용한다.
 
 사용자 단어 사전을 구축하여 형태소 분석이 잘 되지 않아 추출되지 않는 명사를 잘 인식할 수 있도록 돕는다.
 
@@ -73,7 +73,7 @@ http://blog.naver.com/PostView.nhn?blogId=shino1025&logNo=222179854044&categoryN
 
 다음으로 불용어로 판단되는 단어들을 삭제 한다.
 
-마지막으로 복합명사를 처리하고, 뉴스 기사에 자주 등장하는 단어 중에, 연속적으로 의미 있는 단어로 구성된 문구를 처리하기 위해 N-gram으로 토큰화하여 코퍼스를 준비한다.
+마지막으로 복합명사를 처리하고, 뉴스 기사에 자주 등장하는 단어 중에, 연속적으로 의미 있는 단어로 구성된 문구를 처리하기 위해 ```N-gram```으로 토큰화하여 코퍼스를 준비한다.
 
 
 
@@ -90,7 +90,7 @@ LDA 토픽 모델링을 통해 산출된 각 토픽의 상위 단어들(top-rank
 ### Relevance Score
 ![image](https://user-images.githubusercontent.com/55436953/120982711-f21d1e00-c7b3-11eb-8174-c7c178ab5a52.png)
 
-lambda가 1이면 한 토픽에 등장하는 빈도 수만을 가지고 상위 단어를 찾는다. lambda가 0이면 다른 토픽에도 자주 등장하는 단어들의 relevance 값이 낮아지고, 한 토픽에만 등장하는 단어일수록 relevance 값이 높아진다. 해당 project에서는 적절한 lambda 값(0.6)을 이용한다.
+```lambda```가 1이면 한 토픽에 등장하는 빈도 수만을 가지고 상위 단어를 찾는다. ```lambda```가 0이면 다른 토픽에도 자주 등장하는 단어들의 ```relevance``` 값이 낮아지고, 한 토픽에만 등장하는 단어일수록 ```relevance``` 값이 높아진다. 해당 project에서는 적절한 ```lambda``` 값(0.6)을 이용한다.
 
 Reference: [https://lovit.github.io/nlp/2018/09/27/pyldavis_lda/](https://lovit.github.io/nlp/2018/09/27/pyldavis_lda/)
 
