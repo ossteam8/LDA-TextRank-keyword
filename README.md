@@ -13,12 +13,12 @@ bash <(curl -s https://raw.githubusercontent.com/konlpy/konlpy/master/scripts/me
 ## Actual Running
 ### Required
 1. Articles
-\["article1","article2",...,"articleN"\] type: list
+```\["article1","article2",...,"articleN"\]``` type: list
 2. Id of Articles
-\[1,2,3,4,...,N\] type: list
+```\[1,2,3,4,...,N\]``` type: list
 does not need to be in-order
 3. stop.txt
-a,is,...,@@@ -> distinguished by commas(,) in .txt file
+```a,is,...,@@@``` -> distinguished by commas(,) in .txt file
 
 **[stop.txt](stop.txt)** is prepared and provided by [linkyouhj](https://github.com/linkyouhj) and [Chae Hui Seon](https://github.com/chaehuiseon)
 
@@ -48,7 +48,7 @@ LDA토픽 모델링을 위해 다음과 같은 순서로 문서들을 전처리�
 
 먼저, 전처리를 위해 입력되는 문서(뉴스 기사들)는 ```["기사1","기사2","기사3",....,"기사N"]```의 형식이다.
 
-명사 추출은 한글 형태소 분석기 Mecab을 사용한다.
+명사 추출은 한글 형태소 분석기 ```Mecab```을 사용한다.
 
 사용자 단어 사전을 구축하여 형태소 분석이 잘 되지 않아 추출되지 않는 명사를 잘 인식할 수 있도록 돕는다.
 
@@ -68,14 +68,14 @@ Gensim's LDA topic modeling algorithm implemented
 
 토픽 모델링으로서 LDA는 토픽(주제)별 단어의 분포, 문서별 토픽의 분포를 추정하는 확률적 모형이다. LDA가 실제로 하는 일은 현재 문서들에 등장하는 단어들(w값들)을 보고 어떤 토픽에서 뽑힌건지 단어들의 이면적인 정보를 추론하는 것이다.
 
-LDA 토픽 모델링을 통해 산출된 각 토픽의 상위 단어들(top-ranking terms)은 해당 토픽에 대한 단어의 출현 빈도수를 기준으로 선정된다.
+```LDA``` 토픽 모델링을 통해 산출된 각 토픽의 상위 단어들(top-ranking terms)은 해당 토픽에 대한 단어의 출현 빈도수를 기준으로 선정된다.
 
 한 토픽에 출현 빈도가 높은 단어가 다른 토픽에도 출현 빈도가 높을 수 있기 때문에 단순히 빈도수만을 기준으로 선택한다면 토픽 간의 분별성이 낮아진다.
 따라서 Relevance Score를 사용해 분별성을 높였다.
 ### Relevance Score
 ![image](https://user-images.githubusercontent.com/55436953/120982711-f21d1e00-c7b3-11eb-8174-c7c178ab5a52.png)
 
-lambda가 1이면 한 토픽에 등장하는 빈도 수만을 가지고 상위 단어를 찾는다. lambda가 0이면 다른 토픽에도 자주 등장하는 단어들의 relevance 값이 낮아지고, 한 토픽에만 등장하는 단어일수록 relevance 값이 높아진다. 해당 project에서는 적절한 lambda 값(0.6)을 이용한다.
+```lambda```가 1이면 한 토픽에 등장하는 빈도 수만을 가지고 상위 단어를 찾는다. ```lambda```가 0이면 다른 토픽에도 자주 등장하는 단어들의 relevance 값이 낮아지고, 한 토픽에만 등장하는 단어일수록 relevance 값이 높아진다. 해당 project에서는 적절한 ```lambda``` 값(0.6)을 이용한다.
 
 Reference: [https://lovit.github.io/nlp/2018/09/27/pyldavis_lda/](https://lovit.github.io/nlp/2018/09/27/pyldavis_lda/)
 
