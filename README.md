@@ -75,7 +75,7 @@ LDA 토픽 모델링을 통해 산출된 각 토픽의 상위 단어들(top-rank
 ### Relevance Score
 ![image](https://user-images.githubusercontent.com/55436953/120982711-f21d1e00-c7b3-11eb-8174-c7c178ab5a52.png)
 
-
+lambda가 1이면 한 토픽에 등장하는 빈도 수만을 가지고 상위 단어를 찾는다. lambda가 0이면 다른 토픽에도 자주 등장하는 단어들의 relevance 값이 낮아지고, 한 토픽에만 등장하는 단어일수록 relevance 값이 높아진다. 해당 project에서는 적절한 lambda 값(0.6)을 이용한다.
 
 Reference: [https://lovit.github.io/nlp/2018/09/27/pyldavis_lda/](https://lovit.github.io/nlp/2018/09/27/pyldavis_lda/)
 
