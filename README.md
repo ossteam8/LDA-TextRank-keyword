@@ -53,14 +53,21 @@ LDA토픽 모델링을 위해 다음과 같은 순서로 문서들을 전처리�
 사용자 단어 사전을 구축하여 형태소 분석이 잘 되지 않아 추출되지 않는 명사를 잘 인식할 수 있도록 돕는다.
 
 사용자 단어 사전 설치 방법 : 
+
 http://blog.naver.com/PostView.nhn?blogId=shino1025&logNo=222179854044&categoryNo=44&parentCategoryNo=0&viewDate=&currentPage=1&postListTopCurrentPage=1&from=search
 
 사용자 단어 사전 적용 방법 :
+
 (1) nnp.csv, user-nnp.csv 다운
+
 (2) /mecab-ko-dic-2.1.1-20180720/user-dic 으로 이동해서 다운 받은 nnp.csv 파일 내용을 기존 파일에 덮어씌우기 한다.
+
 (3) /mecab-ko-dic-2.1.1-20180720/tools 으로 이동해서 sh add-userdic.sh 입력
+
 (4) /mecab-ko-dic-2.1.1-20180720 으로 이동해서 make clean 후 make install
+
 (5) /mecab-ko-dic-2.1.1-20180720 으로 이동해서 다운 받은 user-nnp.csv 파일 내용을 기존 파일에 덮어 씌우기 하고 현재 디렉토리에서 make clean make install
+
 
 다음으로 불용어로 판단되는 단어들을 삭제 한다.
 
