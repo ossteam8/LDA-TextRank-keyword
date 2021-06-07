@@ -2,6 +2,11 @@
 ### Korean keyword extractor
 Combined LDA and TextRank Algorithm 
 
+3908개의 뉴스 기사 본문 데이터들을 대상으로 키워드를 추출합니다.
+전처리 과정에서는 노동 집약적으로 만들어진 [불용어사전](stop.txt)와 [사용자사전]을 이용하였습니다.
+```LDA``` 알고리즘을 먼저 적용해 relevance에 기반한 ```top-20 keyword```를 추출합니다. 
+이후 각 토픽에 기여하는 문서들에서 추출한 키워드들을 포함하는 문장들에 대해 ```TextRank``` 알고리즘을 재적용합니다.
+
 # Running project 
 install [requirements.txt](requirements.txt)
 
