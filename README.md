@@ -13,9 +13,11 @@ bash <(curl -s https://raw.githubusercontent.com/konlpy/konlpy/master/scripts/me
 ## Actual Running
 ### Required
 1. Articles
-\["article1","article2",...,"articleN"\] in form of a list
+\["article1","article2",...,"articleN"\] type: list
 2. Id of Articles
-\[1,2,3,4,...,N\] does not need to be in-order
+\[1,2,3,4,...,N\] type: list
+
+does not need to be in-order
 3. stop.txt
 a,is,...,@@@ -> distinguished by commas(,) in .txt file
 
