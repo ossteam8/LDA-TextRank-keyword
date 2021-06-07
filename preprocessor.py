@@ -68,7 +68,7 @@ class Preprocessor:
             NT_list.append([])
         return NT_list
 
-    def compute_NUM_TOPICS(self,corpus,id2word,bigram_document,t_min=5,t_max=7):
+    def compute_NUM_TOPICS(self,corpus,id2word,bigram_document,t_min=5,t_max=20):
         coherence_score = []
         for i in range(t_min, t_max):
             model = gensim.models.ldamodel.LdaModel(corpus = corpus, id2word=id2word, num_topics=i)
