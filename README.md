@@ -127,7 +127,7 @@ LDA를 통해 선정된 각 토픽별로 토픽에 기여하는 문서들을 대
 
 ### PageRank 공식
 
-![image]("https://user-images.githubusercontent.com/80442377/120991397-8c815f80-c7bc-11eb-85c5-6e2d6ad36baf.png")
+<img width="310" alt="pagerank공식" src="https://user-images.githubusercontent.com/80442377/120992094-3a8d0980-c7bd-11eb-9ad8-1f957a45f8a9.png">
 
 Reference: [https://lovit.github.io/nlp/2019/04/30/textrank/](https://lovit.github.io/nlp/2019/04/30/textrank/)
 
