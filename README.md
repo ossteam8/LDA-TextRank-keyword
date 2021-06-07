@@ -65,9 +65,9 @@ LDA토픽 모델링을 위해 다음과 같은 순서로 문서들을 전처리�
 cd mecab-ko-dic-2.1.1-20180720/user-dic
 
 open .
-
-파인더가 열리면 다운받은 nnp.csv파일을 기존 파일에 덮어 씌움.
 ```
+파인더가 열리면 다운받은 nnp.csv파일을 기존 파일에 덮어 씌움.
+
 (3)
 ```
 cd ../tools
@@ -79,7 +79,9 @@ make install
 (4)
 ```
 open .
+```
 파인더가 열리면 다운받은 user-nnp.csv파일을 기존 파일에 덮어 씌움.
+```
 make clean
 make install
 ```
