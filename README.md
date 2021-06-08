@@ -71,6 +71,10 @@ LDA토픽 모델링을 위해 다음과 같은 순서로 문서들을 전처리�
 
 (1) nnp.csv, user-nnp.csv 다운
 
+[nnp.csv](https://github.com/ossteam8/LDA-TextRank-keyword/blob/main/nnp.csv)
+
+[user-nnp.csv](https://github.com/ossteam8/LDA-TextRank-keyword/blob/main/user-nnp.csv)
+
 (2)
 ```
 cd mecab-ko-dic-2.1.1-20180720/user-dic
