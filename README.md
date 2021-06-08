@@ -7,6 +7,10 @@ Combined LDA and TextRank Algorithm
 ```LDA``` 알고리즘을 먼저 적용해 relevance에 기반한 ```top-20 keyword```를 추출합니다. 
 이후 각 토픽에 기여하는 문서들에서 추출한 키워드들을 포함하는 문장들에 대해 ```TextRank``` 알고리즘을 재적용합니다.
 
+### K-news keywords
+You can find complete project at this repository
+[K-news keywords](https://github.com/ossteam8/K-news-keyword)
+
 # Running project 
 install [requirements.txt](requirements.txt)
 
