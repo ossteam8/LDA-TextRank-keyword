@@ -11,6 +11,7 @@ Combined LDA and TextRank Algorithm
 install [requirements.txt](requirements.txt)
 
 Installing `Mecab` 
+
 Use the line below at your terminal
 ```
 bash <(curl -s https://raw.githubusercontent.com/konlpy/konlpy/master/scripts/mecab.sh)
