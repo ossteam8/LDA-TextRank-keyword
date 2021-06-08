@@ -38,19 +38,19 @@ class LDA_TR:
 def run():
     freeze_support()
     st = time.time()
-    with open('sample_data/economy_id.pickle', 'rb') as f:
-        id_news = pickle.load(f)
     with open('sample_data/politic_id.pickle', 'rb') as f:
-        id_news.extend(pickle.load(f))
-    with open('sample_data/society_id.pickle', 'rb') as f:
-        id_news.extend(pickle.load(f))
+        id_news = pickle.load(f)
+    #with open('sample_data/politic_id.pickle', 'rb') as f:
+    #    id_news.extend(pickle.load(f))
+    #with open('sample_data/society_id.pickle', 'rb') as f:
+    #    id_news.extend(pickle.load(f))
 
-    with open('sample_data/economy_contents.pickle', 'rb') as f:
-        news = pickle.load(f)
     with open('sample_data/politic_contents.pickle', 'rb') as f:
-        news.extend(pickle.load(f))
-    with open('sample_data/society_contents.pickle', 'rb') as f:
-        news.extend(pickle.load(f))
+        news = pickle.load(f)
+    #with open('sample_data/politic_contents.pickle', 'rb') as f:
+    #    news.extend(pickle.load(f))
+    #with open('sample_data/society_contents.pickle', 'rb') as f:
+    #    news.extend(pickle.load(f))
     lda_tr = LDA_TR()
     etc, num = lda_tr.save_topics(news,id_news)
     print('loop')
@@ -59,7 +59,7 @@ def run():
     print(len(news))
     save_file = [[]]
     for i in range(1,num):
-        print(etc[i])
+        print(etc[i][0])
     '''
     for i in range(1,num+1):
         save_file.append(sorted(etc[i][0],reverse=True, key = lambda x: len(x[2])))

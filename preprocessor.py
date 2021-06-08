@@ -24,9 +24,6 @@ class Preprocessor:
         f = open("stop.txt", 'r')
         self.stop_words = f.read().split(',')
         f.close()
-
-
-
     def merge_news(self,news):
         lines = ""
         for i in news:
