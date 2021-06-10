@@ -1,5 +1,6 @@
 # Abstract
 ### Korean keyword extractor
+[![license badge](https://img.shields.io/github/license/ossteam8/LDA-TextRank-keyword)]
 Combined LDA and TextRank Algorithm 
 
 3908개의 뉴스 기사 본문 데이터들을 대상으로 키워드를 추출합니다.
@@ -71,11 +72,7 @@ LDA토픽 모델링을 위해 다음과 같은 순서로 문서들을 전처리�
 
 (http://blog.naver.com/PostView.nhn?blogId=shino1025&logNo=222179854044&categoryNo=44&parentCategoryNo=0&viewDate=&currentPage=1&postListTopCurrentPage=1&from=search)
 
-(1) nnp.csv, user-nnp.csv 다운
-
-[nnp.csv](https://github.com/ossteam8/LDA-TextRank-keyword/blob/main/nnp.csv)
-
-[user-nnp.csv](https://github.com/ossteam8/LDA-TextRank-keyword/blob/main/user-nnp.csv)
+(1) [nnp.csv](https://github.com/ossteam8/LDA-TextRank-keyword/blob/main/nnp.csv), [user-nnp.csv](https://github.com/ossteam8/LDA-TextRank-keyword/blob/main/user-nnp.csv) 다운로드
 
 (2)
 ```
@@ -83,7 +80,7 @@ cd mecab-ko-dic-2.1.1-20180720/user-dic
 
 open .
 ```
-파인더가 열리면 다운받은 nnp.csv파일을 기존 nnp.csv 파일에 덮어 씌움.
+파인더가 열리면 다운받은 nnp.csv파일을 기존 nnp.csv 파일에 덮어 씌움
 
 (3)
 ```
@@ -97,7 +94,7 @@ make install
 ```
 open .
 ```
-파인더가 열리면 다운받은 user-nnp.csv파일을 기존 user-nnp.csv 파일에 덮어 씌움.
+파인더가 열리면 다운받은 user-nnp.csv파일을 기존 user-nnp.csv 파일에 덮어 씌움
 ```
 make clean
 make install
@@ -107,7 +104,7 @@ make install
 ### [LDAkey_extractor](LDAkey_extractor)
 Gensim's LDA topic modeling algorithm implemented
 
-토픽 모델링으로서 LDA는 토픽(주제)별 단어의 분포, 문서별 토픽의 분포를 추정하는 확률적 모형이다. LDA가 실제로 하는 일은 현재 문서들에 등장하는 단어들(w값들)을 보고 어떤 토픽에서 뽑힌건지 단어들의 이면적인 정보를 추론하는 것이다.
+토픽 모델링으로서 LDA는 토픽(주제)별 단어의 분포, 문서별 토픽의 분포를 추정하는 확률적 모형이다. LDA가 실제로 하는 일은 현재 문서들에 등장하는 단어들을 보고 어떤 토픽에서 뽑힌건지 단어들의 이면적인 정보를 추론하는 것이다.
 
 LDA 토픽 모델링을 통해 산출된 각 토픽의 상위 단어들(top-ranking terms)은 해당 토픽에 대한 단어의 출현 빈도수를 기준으로 선정된다.
 
