@@ -1,6 +1,7 @@
 # Abstract
 ### Korean keyword extractor
-[![license badge](https://img.shields.io/github/license/ossteam8/LDA-TextRank-keyword)]
+![license badge](https://img.shields.io/github/license/ossteam8/LDA-TextRank-keyword)
+
 Combined LDA and TextRank Algorithm 
 
 3908개의 뉴스 기사 본문 데이터들을 대상으로 키워드를 추출합니다.
