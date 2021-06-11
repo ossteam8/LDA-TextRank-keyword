@@ -71,7 +71,7 @@ LDA토픽 모델링을 위해 다음과 같은 순서로 문서들을 전처리�
 
 ### 사용자 단어 사전 설치 방법 
 
-(http://blog.naver.com/PostView.nhn?blogId=shino1025&logNo=222179854044&categoryNo=44&parentCategoryNo=0&viewDate=&currentPage=1&postListTopCurrentPage=1&from=search)
+http://blog.naver.com/PostView.nhn?blogId=shino1025&logNo=222179854044&categoryNo=44&parentCategoryNo=0&viewDate=&currentPage=1&postListTopCurrentPage=1&from=search
 
 (1) [nnp.csv](https://github.com/ossteam8/LDA-TextRank-keyword/blob/main/nnp.csv), [user-nnp.csv](https://github.com/ossteam8/LDA-TextRank-keyword/blob/main/user-nnp.csv) 다운로드
 
